@@ -94,46 +94,31 @@ function removeImage(imageId, placeholderId) {
     document.getElementById('previewImage2').style.display = 'none';
 }
 
-// تابع اصلی پردازش تصویر
 async function processImage() {
-    const input = document.getElementById('imageUpload1');
-    const file = input.files[0];
-    
-    if (!file) {
-        alert('لطفا ابتدا تصویری انتخاب کنید');
+    var srcImage = document.getElementById('previewImage1').dataset.imageUrl;
+
+    if (!srcImage) {
+        alert("لطفاً تصویری را بارگذاری کنید.");
         return;
     }
 
-    try {
-        // نمایش وضعیت پردازش
-        const loading = document.getElementById('loading');
-        const resultImage = document.getElementById('previewImage2');
-        loading.style.display = 'block';
-        resultImage.style.display = 'none';
+    const response = await fetch(srcImage);
+    const imageBlob = await response.blob();
 
-        // اتصال به مدل
-        const client = await window.GradioClient.connect("TheStinger/Ilaria_Upscaler");
-        
-        // ارسال درخواست پردازش
-        const result = await client.predict("/realesrgan", {
-            img: file,
-            model_name: "RealESRGAN_x4plus",
-            denoise_strength: 0.5,
-            face_enhance: true,
-            outscale: 2
-        });
+    const client = await Client.connect("TheStinger/Ilaria_Upscaler");
+    const result = await client.predict("/realesrgan", { 
+        img: imageBlob,         
+        model_name: "RealESRGAN_x4plus",        
+        denoise_strength: 0,        
+        face_enhance: true,         
+        outscale: 1, 
+    });
 
-        // نمایش نتیجه
-        resultImage.src = URL.createObjectURL(result.data);
-        resultImage.style.display = 'block';
-        loading.style.display = 'none';
-
-    } catch (error) {
-        console.error('خطا در پردازش:', error);
-        alert('خطا در پردازش تصویر! لطفا دوباره امتحان کنید.');
-        loading.style.display = 'none';
-    }
+    const outputImage = result.data;
+    document.getElementById('previewImage2').src = outputImage;
+    document.getElementById('previewImage2').style.display = 'block';
 }
+
 </script>
 
 </body>
