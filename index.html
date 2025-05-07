@@ -97,7 +97,44 @@
 </footer>
 
 <script>
-// Image Processing Function
+// Image Management Functions
+function triggerUpload(inputId) {
+    document.getElementById(inputId).click();
+}
+
+function loadImage(event, imageId, placeholderId) {
+    const output = document.getElementById(imageId);
+    const placeholder = document.getElementById(placeholderId);
+    const file = event.target.files[0];
+    
+    if (file) {
+        output.src = URL.createObjectURL(file);
+        output.style.display = 'block';
+        placeholder.style.display = 'none';
+        document.getElementById('previewImage2').style.display = 'none';
+    }
+}
+
+function removeImage() {
+    const inputs = ['previewImage1', 'previewImage2'];
+    const placeholders = ['placeholder1'];
+    
+    inputs.forEach(id => {
+        const element = document.getElementById(id);
+        if(element) {
+            element.src = "";
+            element.style.display = 'none';
+        }
+    });
+    
+    placeholders.forEach(id => {
+        document.getElementById(id).style.display = 'block';
+    });
+    
+    document.getElementById('imageUpload1').value = '';
+    document.getElementById('loading').style.display = 'none';
+}
+
 async function processImage() {
     const fileInput = document.getElementById('imageUpload1');
     const file = fileInput.files[0];
