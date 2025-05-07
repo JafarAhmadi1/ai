@@ -43,25 +43,6 @@
   </div>
 </section>
 
-<script>
-function triggerUpload(inputId) {
-    document.getElementById(inputId).click();
-}
-
-function loadImage(event, imageId, placeholderId) {
-    var output = document.getElementById(imageId);
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.style.display = 'block';
-    document.getElementById(placeholderId).style.display = 'none';
-}
-
-function removeImage(imageId, placeholderId) {
-    var output = document.getElementById(imageId);
-    output.src = "";
-    output.style.display = 'none';
-    document.getElementById(placeholderId).style.display = 'block';
-}
-</script>
 
 
 
@@ -114,6 +95,25 @@ function validateForm() {
 }
 </script>
 
+<script>
+function triggerUpload(inputId) {
+    document.getElementById(inputId).click();
+}
+
+function loadImage(event, imageId, placeholderId) {
+    var output = document.getElementById(imageId);
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.style.display = 'block';
+    document.getElementById(placeholderId).style.display = 'none';
+}
+
+function removeImage(imageId, placeholderId) {
+    var output = document.getElementById(imageId);
+    output.src = "";
+    output.style.display = 'none';
+    document.getElementById(placeholderId).style.display = 'block';
+}
+</script>
 
 
   
