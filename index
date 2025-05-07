@@ -1,0 +1,508 @@
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>Facial Auto Rig</title> 
+     <!--<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0" /> -->
+    <link rel='stylesheet' href="css/app.css">
+  <link rel="icon" href="icon.png">
+</head> 
+  
+<body class="container is-max-desktop has-background-light is-mobile has-text-black-bis">
+<section class="container has-background-dark is-mobile"> 
+  <br> 
+</section>
+  
+
+<section class="container has-background-white-ter is-mobile">
+  <div class="hero-body has-background-grey-lighter">
+    <div class="container">
+      <div class="columns is-flex"> <div class="column is-one-quarter">
+          <figure class="image is-256x256" style="margin-left: 50px;"> <img src="img/head-2.png" alt="img header">
+          </figure>
+        </div>
+        <div class="column">
+          <h1 class="title" style="margin-left: 150px; margin-top: 50px;"> <a class="has-text-black-bis" href="https://rigger-speed.github.io/face/">Facial Auto Rig </a> </h1>
+          <h2 class="title mr-4 is-size-4 has-text-black-bis" style="margin-left: 100px;  margin-top: 20px;">
+            Script to speed up Rig in Maya
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section class="container has-background-dark is-mobile m-10 p-5"> 
+<span></span>
+</section>
+  
+<div class="container is-centered mt-40">
+        <div class="buttons has-addons is-centered ">
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('https://rigger-speed.github.io/face/')"><strong>Home</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('FacialAutoRig-1.html')"><strong>Documentation</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('tutorial.html')"><strong>Tutorial</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('download.html')"><strong>Download</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('About.html')"><strong>About</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('email.html')"><strong>Connect</strong></button>
+
+           <!--<button class="button has-background-dark has-text-white-bis" onclick= "window.open('form.html')"><strong>Form</strong></button>-->
+
+          
+      </div>
+   </div>
+
+
+  
+  <br> <br>
+  <!--=============== -->
+  <section class="box m-5 has-background-light has-text-black-bis ">
+    <br><p><strong class="has-text-black-bis">**Enhancing Character Rigging Efficiency and Speed with Maya Script**</strong> </p><br>
+    <p> <strong class="has-text-black-bis">Welcome to our website!</strong> </p><br>
+
+    
+<div class="container is-fluid">
+  <div class="columns is-mobile is-info">
+    <div class="box is-primary has-background-light">
+      <div class="columns is-multiline" style="max-width: 100%; height: auto;">
+        <div class="column is-3">
+          <figure class="image is-responsive">
+            <img src="img/hf1.gif" alt="facial Auto Rig tutorial" style="width: 200px; height: auto;">
+          </figure>
+        </div>
+        <div class="column is-3">
+          <figure class="image is-responsive">
+            <img src="img/hf2.gif" alt="facial Auto Rig tutorial" style="width: 200px; height: auto;">
+          </figure>
+        </div>
+        <div class="column is-3">
+          <figure class="image is-responsive">
+            <img src="img/hf3.gif" alt="facial Auto Rig tutorial" style="width: 200px; height: auto;">
+          </figure>
+        </div>
+        <div class="column is-3">
+          <figure class="image is-responsive">
+            <img src="img/hf4.gif" alt="facial Auto Rig tutorial" style="width: 200px; height: auto;">
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <br> 
+  <div class="container is-fluid"> 
+        <div class="columns is-mobile is-info"> 
+            <div class="column"> 
+                <div class="box is-primary has-background-light"> 
+                    <div class="media-left">
+                    <figure class="image is-1024x1024">
+                       <a href="FacialAutoRig-1.html"><img src="img/facialAutoRig.jpg" alt="facial Auto Rig tutorial" target="_blank" ></a>
+                    </figure>
+                </div>
+                   <p>  <a href="FacialAutoRig-1.html" target="_blank">facialAutoRig Tab1 </a> </p>
+                </div> 
+            </div>
+            <div class="column"> 
+                <div class="box is-primary has-background-light"> 
+                    <div class="media-left">
+                    <figure class="image is-1024x1024">
+                       <a href="FacialAutoRig-1.html"><img src="img/facialAutoRig_2.jpg" alt="facial Auto Rig tutorial" target="_blank" ></a>
+                    </figure>
+                  </div>
+                   <p>  <a href="FacialAutoRig-1.html" target="_blank">facialAutoRig Tab2 </a> </p>
+                </div> 
+            </div> 
+
+        </div> 
+    
+
+    </div> 
+
+    
+  
+
+  </section>
+
+
+  
+  <!--====== label===Email========= -->
+<div name="divA" class="box has-background-light is-vcentered ">
+     <div class="field is-grouped has-text-black-bis" >
+       <label class="label has-text-black-bis">Email</label>
+       <label class="label has-text-black-bis " style="padding-left: 10rem;">Message</label>
+     </div>
+    <!-- modify this form HTML and place wherever you want your form -->
+   <section name="sec" class=" has-background-light is-centered is-5" >
+     <form name="myForm" class="field is-grouped" onsubmit="return validateForm()"
+           action="https://formspree.io/f/xvoeyvjv"  method="POST">
+        <p class="control ">
+          <input class="input" type="text" name="email" placeholder="Your email:*">
+        </p>
+
+        <p class="control ">
+          <textarea class="textarea" rows="1" name="message" placeholder=" Your message:*"></textarea>
+        </p>
+        <p class="control">
+           <button class="button is-info" type="submit">Send</button>
+        </p>
+        <label class="label has-text-danger" name="errorL" id="errorL"></label>
+        <label class="label has-text-success" name="successful" id="successful"></label>
+     </form>
+   </section>
+
+
+</div>
+
+  <div>
+   <a class="button is-danger ml-6" onclick="window.open('FacialAutoRig-1.html')" >Facial Auto Rig</a>
+  </div> 
+
+ <br>
+<footer class="section has-background-dark is-mobile">
+  <div class="container pb-5 has-text-centered ">
+    <a class="mx-auto mb-4 is-inline-block" href="#">
+      <img class="image" src="" alt="" width="96px">
+    </a>
+    <ul class="mb-4 is-flex is-flex-wrap-wrap is-justify-content-center is-align-items-center">
+      <li><a class="button is-white" href="About.html">About</a></li>
+      <li><a class="button is-white" href="email.html">Contact</a></li>
+      <li><a class="button is-white" href="tutorial.html">Tutorial</a></li>
+      <li><a class="button is-white" href="FacialAutoRig-1.html">Documentation</a></li>
+    </ul>
+    <div>
+
+       <p class="has-text-white-bis">Gmail:<a class="has-text-danger" > facial.rig@gmail.com </a></p>
+        <p class="has-text-white-bis">Gmail 2: <a class="has-text-danger "> alirezahabibi106@gmail.com </a></p>
+       <p class="has-text-white-bis ">Instegram: <a class="has-text-danger"> @alirezahabibi_1 </a></p>
+        </div>
+
+  </div>
+  <div class="pt-5" style="border-top: 1px solid #dee2e6;"></div>
+  <div class="container">
+    <p class="has-text-centered has-text-white-bis">All rights reserved © ARH Corporation 2025</p>
+  </div>
+</footer>
+
+
+
+
+<script type="text/javascript">
+function validateForm() {
+  var x = document.forms["myForm"]["email"].value;
+  if (x == "") {
+    // alert("Email must be filled out");
+    document.getElementById('errorL').innerHTML = 'Error : Email must be filled out! <br> Please fill in the fields marked with an asterisk';
+    document.getElementById('successful').innerHTML = '';
+    return false;
+  }
+  else {document.getElementById('errorL').innerHTML = '';
+         document.getElementById('successful').innerHTML = 'It was successful';
+  }
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  if (reg.test(x) == false)
+        {
+            // alert('Invalid Email Address');
+            document.getElementById('errorL').innerHTML = 'Error : Invalid Email Address! <br> Please enter the correct email address';
+            document.getElementById('successful').innerHTML = '';
+            return false;
+        }else {document.getElementById('errorL').innerHTML = '';
+         document.getElementById('successful').innerHTML = 'It was successful';
+  }
+
+}
+</script>
+
+
+</body> 
+</html> 
+Chat
+
+New Conversation
+
+🤓 Explain a complex thing
+
+Explain Artificial Intelligence so that I can explain it to my six-year-old child.
+
+
+🧠 Get suggestions and create new ideas
+
+Please give me the best 10 travel ideas around the world
+
+
+💭 Translate, summarize, fix grammar and more…
+
+Translate "I love you" French
+
+
+GPT-4o Mini
+Hello, how can I help you today?
+Explain Artificial Intelligence so that I can explain it to my six-year-old child.
+GPT-4o Mini
+Sure! You can think of Artificial Intelligence, or AI, like a very smart robot or computer that can learn and think a little bit like a person. 
+Imagine you have a toy robot that can play games with you. At first, it might not know how to play very well. But if you show it how to play, little by little, the robot gets better and better. That's a bit like AI! 
+AI uses lots of information, like pictures, words, and sounds, to learn new things and help us with different tasks. Just like when you learn to ride a bike or solve a puzzle, AI learns from experience, making it better each time.
+So, you can say that AI is like a friendly helper that can learn and understand things, just like we do!
+سلام
+GPT-4o Mini
+سلام! چطور می‌توانم به شما کمک کنم؟
+میتونی تصویر کارتونی از مرد با تعجب بدی
+GPT-4o Mini
+متأسفانه من نمی‌توانم تصاویری ارائه دهم، اما می‌توانم به شما بگویم که چطور یک تصویر کارتونی از مردی با حالت تعجب طراحی کنید. 
+
+اوج حالت صورت: 
+
+چشمان بزرگ و گرد برای نشان دادن تعجب.
+
+ابروهای بالا رفته و شکاف دهان باز.
+
+
+
+اجزاء صورت: 
+
+می‌توانید صورت را گرد و ملایم بکشید.
+
+برای بینی می‌توانید از یک دایره کوچک استفاده کنید.
+
+
+
+مو: 
+
+موهای نامنظم می‌تواند حالت تعجب را بیشتر نشان دهد.
+
+
+
+لباس: 
+
+یک تی‌شرت ساده یا یک پیراهن را در طراحی بگنجانید.
+
+
+
+پیش‌زمینه: 
+
+می‌توانید از یک پس‌زمینه ساده استفاده کنید که احساس شود در یک لحظه شگفت‌انگیز هست.
+
+
+
+
+اگر خودتان می‌خواهید بکشید یا به یک هنرمند دیگر سفارش دهید، این نکات می‌توانند مفید باشند!
+پایتخت ایران کجاس
+GPT-4o Mini
+پایتخت ایران، تهران است. این شهر بزرگترین شهر کشور و مهم‌ترین مرکز سیاسی، اقتصادی و فرهنگی ایران به شمار می‌آید. تهران در شمال ایران واقع شده و دارای جاذبه‌های تاریخی، فرهنگی و گردشگری فراوانی است.
+محدودیت تو چقدر است
+GPT-4o Mini
+محدودیت‌های من شامل موارد زیر است:
+
+زمان: اطلاعات من تا اکتبر 2023 به‌روز است و نمی‌توانم اطلاعاتی پس از آن تاریخ ارائه دهم.
+
+عدم توانایی در پردازش اطلاعات شخصی: نمی‌توانم داده‌ها یا اطلاعات شخصی را ذخیره یا پردازش کنم.
+
+نداشتن احساسات و تجربیات انسانی: نمی‌توانم تجربیات شخصی یا احساسات را درک کنم یا بیان کنم.
+
+ورودی‌ها و داده‌های حساسی: نمی‌توانم به سوالات در مورد موضوعات غیرقانونی، نامناسب یا حساس پاسخ دهم.
+
+
+در کل، من به عنوان یک مدل زبان مصنوعی، به سؤال‌ها پاسخ می‌دهم و اطلاعات عمومی را ارائه می‌کنم ولی محدودیت‌های خاصی در این زمینه دارم.
+تحلیل هم میدی
+GPT-4o Mini
+بله، من می‌توانم تحلیل‌هایی را در زمینه‌های مختلف ارائه دهم. این تحلیل‌ها می‌توانند شامل موارد زیر باشند:
+
+تحلیل متنی: بررسی و تحلیل متون، مقالات یا ادبیات به منظور شناسایی ساختار، مضامین و تکنیک‌های استفاده شده.
+
+تحلیل داده‌ها: بحث درباره روش‌های تحلیل داده‌ها و روش‌های آماری و تحلیلی (اگر اطلاعات کافی در دسترس باشد).
+
+تحلیل نظریه‌ها: بررسی و تحلیل نظریه‌های مختلف در زمینه‌های علمی، فلسفی، اجتماعی و اقتصادی.
+
+تحلیل بازار: ارائه تحلیل‌های کلی درباره روندهای بازار در زمینه‌های مختلف (اقتصاد، تکنولوژی، صنعت).
+
+تحلیل رفتار: بررسی رفتار افراد یا گروه‌ها در زمینه‌های اجتماعی، روانشناسی و انسان‌شناسی.
+
+
+لطفاً موضوع خاصی که می‌خواهید تحلیل شود را مشخص کنید تا من بتوانم به شما کمک کنم!
+متن هم خلاصه میکنی
+GPT-4o Mini
+بله، من می‌توانم متون را خلاصه کنم. لطفاً متن مورد نظر خود را ارسال کنید تا آن را برای شما خلاصه کنم.
+چند واژه کلمه میشه بهت داد
+GPT-4o Mini
+شما می‌توانید هر تعداد واژه‌ای که می‌خواهید به من بدهید. من سعی می‌کنم آن را به طور مختصر خلاصه کنم. لطفاً متن یا کلمات مورد نظر خود را ارسال کنید.
+ محدودیت در تعداد کلمات ارسالی نداری
+GPT-4o Mini
+درست است، من هیچ محدودیتی در تعداد کلمات ارسالی ندارم. شما می‌توانید هر تعداد کلمه یا متنی که می‌خواهید ارسال کنید و من به آن پاسخ می‌دهم. اگر سوال خاصی دارید یا موضوعی را می‌خواهید بررسی کنید، لطفاً بفرمایید!
+بزرگترین آبشار جهان کجاس
+GPT-4o Mini
+بزرگترین آبشار جهان، آبشار آنجلا (Angel Falls) در ونزوئلا است. این آبشار با ارتفاعی حدود 979 متر (3212 فوت)، به عنوان بلندترین آبشار جهان شناخته می‌شود. آبشار آنجلا در پارک ملی کانایما واقع شده و به دلیل زیبایی‌های طبیعی و محیط بکر خود، محل جذب گردشگران بسیاری است. این آبشار به نام جیمز انجل، ماجراجوی آمریکایی که برای اولین بار آن را در سال 1933 کشف کرد، نامگذاری شده است.
+Your usage limit has been reached. Please upgrade your plan to continue using. Upgrade
+GPT-4o
+coin image
+0
+Upgrade
+
+
+
+
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+    <title>Facial Auto Rig</title> 
+     <!--<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content=
+        "width=device-width, initial-scale=1.0" /> -->
+    <link rel='stylesheet' href="css/app.css">
+  <link rel="icon" href="icon.png">
+</head> 
+  
+<body class="container is-max-desktop has-background-light is-mobile has-text-black-bis">
+<section class="container has-background-dark is-mobile"> 
+  <br> 
+</section>
+  
+
+<section class="container has-background-white-ter is-mobile">
+  <div class="hero-body has-background-grey-lighter">
+    <div class="container">
+      <div class="columns is-flex"> <div class="column is-one-quarter">
+          <figure class="image is-256x256" style="margin-left: 50px;"> <img src="img/head-2.png" alt="img header">
+          </figure>
+        </div>
+        <div class="column">
+          <h1 class="title" style="margin-left: 150px; margin-top: 50px;"> <a class="has-text-black-bis" href="https://rigger-speed.github.io/face/">Facial Auto Rig </a> </h1>
+          <h2 class="title mr-4 is-size-4 has-text-black-bis" style="margin-left: 100px;  margin-top: 20px;">
+            Script to speed up Rig in Maya
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+  
+<section class="container has-background-dark is-mobile m-10 p-5"> 
+<span></span>
+</section>
+  
+<div class="container is-centered mt-40">
+        <div class="buttons has-addons is-centered ">
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('https://rigger-speed.github.io/face/')"><strong>Home</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('FacialAutoRig-1.html')"><strong>Documentation</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('tutorial.html')"><strong>Tutorial</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('download.html')"><strong>Download</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('About.html')"><strong>About</strong></button>
+         <button class="button has-background-dark has-text-white-bis" onclick= "window.open('email.html')"><strong>Connect</strong></button>
+
+           <!--<button class="button has-background-dark has-text-white-bis" onclick= "window.open('form.html')"><strong>Form</strong></button>-->
+
+          
+      </div>
+   </div>
+
+
+  
+  <br> <br>
+  <!--=============== -->
+  <section class="box m-5 has-background-light has-text-black-bis ">
+    <br><p><strong class="has-text-black-bis">**Enhancing Character Rigging Efficiency and Speed with Maya Script**</strong> </p><br>
+    <p> <strong class="has-text-black-bis">Welcome to our website!</strong> </p><br>
+
+    
+
+
+
+  </section>
+
+
+  
+  <!--====== label===Email========= -->
+<div name="divA" class="box has-background-light is-vcentered ">
+     <div class="field is-grouped has-text-black-bis" >
+       <label class="label has-text-black-bis">Email</label>
+       <label class="label has-text-black-bis " style="padding-left: 10rem;">Message</label>
+     </div>
+    <!-- modify this form HTML and place wherever you want your form -->
+   <section name="sec" class=" has-background-light is-centered is-5" >
+     <form name="myForm" class="field is-grouped" onsubmit="return validateForm()"
+           action="https://formspree.io/f/xvoeyvjv"  method="POST">
+        <p class="control ">
+          <input class="input" type="text" name="email" placeholder="Your email:*">
+        </p>
+
+        <p class="control ">
+          <textarea class="textarea" rows="1" name="message" placeholder=" Your message:*"></textarea>
+        </p>
+        <p class="control">
+           <button class="button is-info" type="submit">Send</button>
+        </p>
+        <label class="label has-text-danger" name="errorL" id="errorL"></label>
+        <label class="label has-text-success" name="successful" id="successful"></label>
+     </form>
+   </section>
+
+
+</div>
+
+  <div>
+   <a class="button is-danger ml-6" onclick="window.open('FacialAutoRig-1.html')" >Facial Auto Rig</a>
+  </div> 
+
+ <br>
+<footer class="section has-background-dark is-mobile">
+  <div class="container pb-5 has-text-centered ">
+   // <a class="mx-auto mb-4 is-inline-block" href="#">
+    //  <img class="image" src="" alt="" width="96px">
+    //</a>
+    //<ul class="mb-4 is-flex is-flex-wrap-wrap is-justify-content-center is-align-items-center">
+     // <li><a class="button is-white" href="About.html">About</a></li>
+      //<li><a class="button is-white" href="email.html">Contact</a></li>
+     // <li><a class="button is-white" href="tutorial.html">Tutorial</a></li>
+     // <li><a class="button is-white" href="FacialAutoRig-1.html">Documentation</a></li>
+    //</ul>
+    <div>
+
+       <p class="has-text-white-bis">Gmail:<a class="has-text-danger" > # </a></p>
+        <p class="has-text-white-bis">Gmail 2: <a class="has-text-danger "> # </a></p>
+       <p class="has-text-white-bis ">Instegram: <a class="has-text-danger"> #- </a></p>
+        </div>
+
+  </div>
+  <div class="pt-5" style="border-top: 1px solid #dee2e6;"></div>
+  <div class="container">
+    <p class="has-text-centered has-text-white-bis">All rights reserved © ARH Corporation 2025</p>
+  </div>
+</footer>
+
+
+
+
+<script type="text/javascript">
+function validateForm() {
+  var x = document.forms["myForm"]["email"].value;
+  if (x == "") {
+    // alert("Email must be filled out");
+    document.getElementById('errorL').innerHTML = 'Error : Email must be filled out! <br> Please fill in the fields marked with an asterisk';
+    document.getElementById('successful').innerHTML = '';
+    return false;
+  }
+  else {document.getElementById('errorL').innerHTML = '';
+         document.getElementById('successful').innerHTML = 'It was successful';
+  }
+  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  if (reg.test(x) == false)
+        {
+            // alert('Invalid Email Address');
+            document.getElementById('errorL').innerHTML = 'Error : Invalid Email Address! <br> Please enter the correct email address';
+            document.getElementById('successful').innerHTML = '';
+            return false;
+        }else {document.getElementById('errorL').innerHTML = '';
+         document.getElementById('successful').innerHTML = 'It was successful';
+  }
+
+}
+</script>
+
+
+</body> 
+</html> 
+
+
+
