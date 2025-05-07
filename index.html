@@ -197,6 +197,25 @@ async function processImage() {
             'TimeoutError': 'زمان پردازش به پایان رسید',
             'NetworkError': 'خطای اتصال به اینترنت'
         };
+catch (error) {
+    console.error("Error details:", error); // Log full error for debugging
+
+    let message = "خطای غیرمنتظره رخ داد"; // Default error message
+
+    if (error instanceof TypeError) {
+        message = "خطای ارتباط با سرور، لطفاً دوباره تلاش کنید.";
+    } else if (error instanceof DOMException && error.name === "AbortError") {
+        message = "درخواست لغو شد.";
+    } else if (error.message.includes("NetworkError")) {
+        message = "خطای اتصال به اینترنت.";
+    } else if (error.message.includes("Timeout")) {
+        message = "زمان پردازش به پایان رسید.";
+    } else if (error.name && errorMessages[error.name]) {
+        message = errorMessages[error.name];
+    }
+
+    alert(`${message}`);
+}
 
         const message = errorMessages[error.name] || 'خطای غیرمنتظره رخ داد';
         alert(`${message}. لطفاً دوباره تلاش کنید.`);
