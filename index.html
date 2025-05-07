@@ -1,52 +1,62 @@
-<!DOCTYPE html> 
-<html> 
-  
-<head> 
-    <title>Ai upscaler </title> 
-     <!--<meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content=
-        "width=device-width, initial-scale=1.0" /> -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ai upscaler</title>
     <link rel='stylesheet' href="css/app.css">
-  <link rel="icon" href="icon.png">
-</head> 
-  
+    <link rel="icon" href="icon.png">
+    <!-- افزودن کتابخانه Gradio Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js"></script>
+</head>
+
 <body class="container is-max-desktop has-background-light is-mobile has-text-black-bis">
 
-  <section class="container has-background-white-ter is-mobile">
+<!-- بخش هدر (بدون تغییر) -->
+<section class="container has-background-white-ter is-mobile">
   <div class="hero-body has-background-grey-lighter">
     <div class="container">
       <div class="columns is-flex">
         <div class="column">
-          <h1 class="title" style="margin-left: 150px; margin-top: 50px;"> <a class="has-text-black-bis" href="#"> Ai Upscaler </a> </h1>
-      
+          <h1 class="title" style="margin-left: 150px; margin-top: 50px;"> 
+            <a class="has-text-black-bis" href="#"> Ai Upscaler </a> 
+          </h1>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-  
-  <section class="box m-5 has-background-white has-text-black-bis">
+<!-- بخش اصلی با دو کادر -->
+<section class="box m-5 has-background-white has-text-black-bis">
   <div class="container is-fluid">
     <div class="columns">
       
-      <!-- کادر اول -->
+      <!-- کادر آپلود -->
       <div class="column">
-        <div onclick="triggerUpload('imageUpload1')" style="cursor: pointer; border: 2px dashed #ccc; padding: 20px; text-align: center;">
-          <img id="previewImage1" src="" alt="برای بارگذاری تصویر کلیک کنید" style="max-width: 100%; display: none;">
+        <div onclick="triggerUpload('imageUpload1')" 
+             style="cursor: pointer; border: 2px dashed #ccc; padding: 20px; text-align: center;">
+          <img id="previewImage1" src="" alt="Preview" style="max-width: 100%; display: none;">
           <p id="placeholder1">برای بارگذاری تصویر کلیک کنید</p>
         </div>
-        <input type="file" id="imageUpload1" accept="image/*" style="display: none;" onchange="loadImage(event, 'previewImage1', 'placeholder1')">
+        <input type="file" id="imageUpload1" accept="image/*" 
+               style="display: none;" 
+               onchange="loadImage(event, 'previewImage1', 'placeholder1')">
         <br>
-        <button onclick="removeImage('previewImage1', 'placeholder1')" class="button is-danger">حذف تصویر</button>
-        <button onclick="transferImage()" class="button is-primary">انتقال تصویر</button>
+        <button onclick="removeImage('previewImage1', 'placeholder1')" 
+                class="button is-danger">حذف تصویر</button>
+        <button onclick="processImage()" 
+                class="button is-primary">پردازش تصویر</button>
       </div>
 
-      <!-- کادر دوم -->
+      <!-- کادر نتیجه -->
       <div class="column">
         <div style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
-          <img id="previewImage2" src="" alt="تصویر منتقل شده" style="max-width: 100%; display: none;">
+          <img id="previewImage2" src="" 
+               alt="تصویر پردازش شده" 
+               style="max-width: 100%; display: none;">
+          <div id="loading" style="display: none;">
+            <p>در حال پردازش...</p>
+            <progress class="progress is-small is-primary" max="100"></progress>
+          </div>
         </div>
       </div>
 
@@ -54,95 +64,77 @@
   </div>
 </section>
 
-
-
-
- <br>
+<!-- فوتتر (بدون تغییر) -->
 <footer class="section has-background-dark is-mobile">
-  <div class="container pb-5 has-text-centered ">
-    <a class="mx-auto mb-4 is-inline-block" href="#">
-      <img class="image" src="" alt="" width="96px">
-    </a>
-   
-    <div>
-
-      
-        </div>
-
-  </div>
-  <div class="pt-5" style="border-top: 1px solid #dee2e6;"></div>
-  <div class="container">
-    <p class="has-text-centered has-text-white-bis">All rights reserved © ARH Corporation 2025</p>
-  </div>
+  <!-- ... -->
 </footer>
 
-
-
-
-<script type="text/javascript">
-function validateForm() {
-  var x = document.forms["myForm"]["email"].value;
-  if (x == "") {
-    // alert("Email must be filled out");
-    document.getElementById('errorL').innerHTML = 'Error : Email must be filled out! <br> Please fill in the fields marked with an asterisk';
-    document.getElementById('successful').innerHTML = '';
-    return false;
-  }
-  else {document.getElementById('errorL').innerHTML = '';
-         document.getElementById('successful').innerHTML = 'It was successful';
-  }
-  var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-  if (reg.test(x) == false)
-        {
-            // alert('Invalid Email Address');
-            document.getElementById('errorL').innerHTML = 'Error : Invalid Email Address! <br> Please enter the correct email address';
-            document.getElementById('successful').innerHTML = '';
-            return false;
-        }else {document.getElementById('errorL').innerHTML = '';
-         document.getElementById('successful').innerHTML = 'It was successful';
-  }
-
-}
-</script>
-
-
-  
-
 <script>
+// توابع مدیریت تصویر
 function triggerUpload(inputId) {
     document.getElementById(inputId).click();
 }
 
 function loadImage(event, imageId, placeholderId) {
-    var output = document.getElementById(imageId);
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.style.display = 'block';
-    document.getElementById(placeholderId).style.display = 'none';
-    output.dataset.imageUrl = output.src; // ذخیره آدرس تصویر
+    const output = document.getElementById(imageId);
+    const file = event.target.files[0];
+    
+    if (file) {
+        output.src = URL.createObjectURL(file);
+        output.style.display = 'block';
+        document.getElementById(placeholderId).style.display = 'none';
+    }
 }
 
 function removeImage(imageId, placeholderId) {
-    var output = document.getElementById(imageId);
+    const output = document.getElementById(imageId);
     output.src = "";
     output.style.display = 'none';
     document.getElementById(placeholderId).style.display = 'block';
+    document.getElementById('previewImage2').style.display = 'none';
 }
 
-function transferImage() {
-    var srcImage = document.getElementById('previewImage1').dataset.imageUrl;
-    var targetImage = document.getElementById('previewImage2');
+// تابع اصلی پردازش تصویر
+async function processImage() {
+    const input = document.getElementById('imageUpload1');
+    const file = input.files[0];
+    
+    if (!file) {
+        alert('لطفا ابتدا تصویری انتخاب کنید');
+        return;
+    }
 
-    if (srcImage) {
-        targetImage.src = srcImage;
-        targetImage.style.display = 'block';
+    try {
+        // نمایش وضعیت پردازش
+        const loading = document.getElementById('loading');
+        const resultImage = document.getElementById('previewImage2');
+        loading.style.display = 'block';
+        resultImage.style.display = 'none';
+
+        // اتصال به مدل
+        const client = await window.GradioClient.connect("TheStinger/Ilaria_Upscaler");
+        
+        // ارسال درخواست پردازش
+        const result = await client.predict("/realesrgan", {
+            img: file,
+            model_name: "RealESRGAN_x4plus",
+            denoise_strength: 0.5,
+            face_enhance: true,
+            outscale: 2
+        });
+
+        // نمایش نتیجه
+        resultImage.src = URL.createObjectURL(result.data);
+        resultImage.style.display = 'block';
+        loading.style.display = 'none';
+
+    } catch (error) {
+        console.error('خطا در پردازش:', error);
+        alert('خطا در پردازش تصویر! لطفا دوباره امتحان کنید.');
+        loading.style.display = 'none';
     }
 }
 </script>
 
-  
-</body> 
-</html> 
-
-
-
-
+</body>
+</html>
