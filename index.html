@@ -95,9 +95,9 @@ function removeImage(imageId, placeholderId) {
 }
 
 async function processImage() {
-    var srcImage = document.getElementById('previewImage1').dataset.imageUrl;
+    var srcImage = document.getElementById('imageUpload1').dataset.imageUrl;
 
-    if (!srcImage) {
+    if (!file) {
         alert("لطفاً تصویری را بارگذاری کنید.");
         return;
     }
@@ -115,8 +115,8 @@ async function processImage() {
     });
 
     const outputImage = result.data;
-    document.getElementById('previewImage2').src = outputImage;
-    document.getElementById('previewImage2').style.display = 'block';
+    document.getElementById('previewImage1').src = outputImage;
+    document.getElementById('previewImage1').style.display = 'block';
 }
 
 </script>
