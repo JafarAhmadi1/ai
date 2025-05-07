@@ -18,54 +18,35 @@
   
 
 <section class="container has-background-white-ter is-mobile">
-  <div class="hero-body has-background-grey-lighter">
-    <div class="container">
-      <div class="columns is-flex"> <div class="column is-one-quarter">
-         
-        </div>
-        <div class="column">
-          <h1 class="title" style="margin-left: 150px; margin-top: 50px;"> <a class="has-text-black-bis" href="#">Image Upscaler</a> </h1>
-          <h2 class="title mr-4 is-size-4 has-text-black-bis" style="margin-left: 100px;  margin-top: 20px;">
-
-          </h2>
-        </div>
+  <section class="box m-5 has-background-white has-text-black-bis">
+  <div class="container is-fluid">
+    <div class="columns">
+      
+      <!-- کادر اول -->
+      <div class="column">
+        <input type="file" id="imageUpload1" accept="image/*" onchange="loadImage(event, 'previewImage1')">
+        <br><br>
+        <img id="previewImage1" src="" alt="تصویر بارگذاری شده" style="max-width: 100%; display: none;">
+        <br><br>
+        <button onclick="executeAction('message1')" class="button is-primary">اجرای عملیات ۱</button>
+        <p id="message1" style="color: green; font-weight: bold;"></p>
       </div>
+
+      <!-- کادر دوم -->
+      <div class="column">
+        <input type="file" id="imageUpload2" accept="image/*" onchange="loadImage(event, 'previewImage2')">
+        <br><br>
+        <img id="previewImage2" src="" alt="تصویر بارگذاری شده" style="max-width: 100%; display: none;">
+        <br><br>
+        <button onclick="executeAction('message2')" class="button is-primary">اجرای عملیات ۲</button>
+        <p id="message2" style="color: green; font-weight: bold;"></p>
+      </div>
+
     </div>
   </div>
 </section>
-  
-<section class="container has-background-dark is-mobile m-10 p-5"> 
-<span></span>
-</section>
-  
-<div class="container is-centered mt-40">
-        <div class="buttons has-addons is-centered ">
-
-          
-      </div>
-   </div>
 
 
-  
-  <br> <br>
-  <!--=============== -->
-  <section class="box m-5 has-background-light has-text-black-bis ">
-    
-
-    
-<div class="container is-fluid">
-  <div class="columns is-mobile is-info">
-    <div class="box is-primary has-background-light">
-
-    </div>
-  </div>
-</div>
-    <br> 
-  <div class="container is-fluid"> 
-       
-    
-
-    </div> 
 
     
   
@@ -123,7 +104,18 @@ function validateForm() {
 }
 </script>
 
+<script>
+function loadImage(event, imageId) {
+    var output = document.getElementById(imageId);
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.style.display = 'block';
+}
 
+function executeAction(messageId) {
+    document.getElementById(messageId).innerText = "عملیات اجرا شد!";
+}
+</script>
+  
 </body> 
 </html> 
 
