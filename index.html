@@ -97,44 +97,6 @@
 </footer>
 
 <script>
-// Image Management Functions
-function triggerUpload(inputId) {
-    document.getElementById(inputId).click();
-}
-
-function loadImage(event, imageId, placeholderId) {
-    const output = document.getElementById(imageId);
-    const placeholder = document.getElementById(placeholderId);
-    const file = event.target.files[0];
-    
-    if (file) {
-        output.src = URL.createObjectURL(file);
-        output.style.display = 'block';
-        placeholder.style.display = 'none';
-        document.getElementById('previewImage2').style.display = 'none';
-    }
-}
-
-function removeImage() {
-    const inputs = ['previewImage1', 'previewImage2'];
-    const placeholders = ['placeholder1'];
-    
-    inputs.forEach(id => {
-        const element = document.getElementById(id);
-        if(element) {
-            element.src = "";
-            element.style.display = 'none';
-        }
-    });
-    
-    placeholders.forEach(id => {
-        document.getElementById(id).style.display = 'block';
-    });
-    
-    document.getElementById('imageUpload1').value = '';
-    document.getElementById('loading').style.display = 'none';
-}
-
 // Image Processing Function
 async function processImage() {
     const fileInput = document.getElementById('imageUpload1');
@@ -147,16 +109,26 @@ async function processImage() {
 
     const loading = document.getElementById('loading');
     const outputImage = document.getElementById('previewImage2');
-    
+    let errorOccurred = false;
+
     try {
-        // Show loading state
         loading.style.display = 'flex';
         outputImage.style.display = 'none';
 
-        // Connect to Gradio API
-        const client = await Client.connect("TheStinger/Ilaria_Upscaler");
+        // افزودن بررسی نوع فایل
+        if (!file.type.startsWith('image/')) {
+            throw new Error('نوع فایل نامعتبر است');
+        }
+
+        // افزودن محدودیت حجم فایل (5MB)
+        if (file.size > 5 * 1024 * 1024) {
+            throw new Error('حداکثر حجم مجاز 5 مگابایت است');
+        }
+
+        const client = await Client.connect("TheStinger/Ilaria_Upscaler", {
+            timeout: 30000 // 30 ثانیه تایم‌اوت
+        });
         
-        // Process image with correct parameters
         const result = await client.predict("/realesrgan", { 
             img: file,
             model_name: "RealESRGAN_x4plus",
@@ -165,14 +137,38 @@ async function processImage() {
             outscale: 4
         });
 
-        // Display result
+        // بررسی پاسخ سرور
+        if (!result?.data?.[0]) {
+            throw new Error('پاسخ نامعتبر از سرور دریافت شد');
+        }
+
         outputImage.src = result.data[0];
         outputImage.style.display = 'block';
+        errorOccurred = false;
+
     } catch (error) {
-        console.error('Error processing image:', error);
-        alert('خطا در پردازش تصویر. لطفاً دوباره تلاش کنید.');
+        errorOccurred = true;
+        console.error('Error details:', {
+            name: error.name,
+            message: error.message,
+            stack: error.stack
+        });
+
+        // نمایش پیام خطای مناسب بر اساس نوع خطا
+        const errorMessages = {
+            'AbortError': 'درخواست لغو شد',
+            'TimeoutError': 'زمان پردازش به پایان رسید',
+            'NetworkError': 'خطای اتصال به اینترنت'
+        };
+
+        const message = errorMessages[error.name] || 'خطای غیرمنتظره رخ داد';
+        alert(`${message}. لطفاً دوباره تلاش کنید.`);
+
     } finally {
         loading.style.display = 'none';
+        if(errorOccurred) {
+            outputImage.style.display = 'none';
+        }
     }
 }
 </script>
