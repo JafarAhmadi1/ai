@@ -26,22 +26,21 @@
         <input type="file" id="imageUpload1" accept="image/*" style="display: none;" onchange="loadImage(event, 'previewImage1', 'placeholder1')">
         <br>
         <button onclick="removeImage('previewImage1', 'placeholder1')" class="button is-danger">حذف تصویر</button>
+        <button onclick="transferImage()" class="button is-primary">انتقال تصویر</button>
       </div>
 
       <!-- کادر دوم -->
       <div class="column">
-        <div onclick="triggerUpload('imageUpload2')" style="cursor: pointer; border: 2px dashed #ccc; padding: 20px; text-align: center;">
-          <img id="previewImage2" src="" alt="برای بارگذاری تصویر کلیک کنید" style="max-width: 100%; display: none;">
-          <p id="placeholder2">برای بارگذاری تصویر کلیک کنید</p>
+        <div style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
+          <img id="previewImage2" src="" alt="تصویر منتقل شده" style="max-width: 100%; display: none;">
         </div>
-        <input type="file" id="imageUpload2" accept="image/*" style="display: none;" onchange="loadImage(event, 'previewImage2', 'placeholder2')">
-        <br>
-        <button onclick="removeImage('previewImage2', 'placeholder2')" class="button is-danger">حذف تصویر</button>
       </div>
 
     </div>
   </div>
 </section>
+
+
 
 
 
@@ -95,6 +94,9 @@ function validateForm() {
 }
 </script>
 
+
+  
+
 <script>
 function triggerUpload(inputId) {
     document.getElementById(inputId).click();
@@ -105,6 +107,7 @@ function loadImage(event, imageId, placeholderId) {
     output.src = URL.createObjectURL(event.target.files[0]);
     output.style.display = 'block';
     document.getElementById(placeholderId).style.display = 'none';
+    output.dataset.imageUrl = output.src; // ذخیره آدرس تصویر
 }
 
 function removeImage(imageId, placeholderId) {
@@ -113,8 +116,17 @@ function removeImage(imageId, placeholderId) {
     output.style.display = 'none';
     document.getElementById(placeholderId).style.display = 'block';
 }
-</script>
 
+function transferImage() {
+    var srcImage = document.getElementById('previewImage1').dataset.imageUrl;
+    var targetImage = document.getElementById('previewImage2');
+
+    if (srcImage) {
+        targetImage.src = srcImage;
+        targetImage.style.display = 'block';
+    }
+}
+</script>
 
   
 </body> 
