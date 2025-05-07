@@ -97,7 +97,7 @@ function removeImage(imageId, placeholderId) {
 async function processImage() {
     var srcImage = document.getElementById('imageUpload1').dataset.imageUrl;
 
-    if (!file) {
+    if (!srcImage) {
         alert("لطفاً تصویری را بارگذاری کنید.");
         return;
     }
