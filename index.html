@@ -19,27 +19,50 @@
       
       <!-- کادر اول -->
       <div class="column">
-        <input type="file" id="imageUpload1" accept="image/*" onchange="loadImage(event, 'previewImage1')">
-        <br><br>
-        <img id="previewImage1" src="" alt="تصویر بارگذاری شده" style="max-width: 100%; display: none;">
-        <br><br>
-        <button onclick="executeAction('message1')" class="button is-primary">اجرای عملیات ۱</button>
-        <p id="message1" style="color: green; font-weight: bold;"></p>
+        <div onclick="triggerUpload('imageUpload1')" style="cursor: pointer; border: 2px dashed #ccc; padding: 20px; text-align: center;">
+          <img id="previewImage1" src="" alt="برای بارگذاری تصویر کلیک کنید" style="max-width: 100%; display: none;">
+          <p id="placeholder1">برای بارگذاری تصویر کلیک کنید</p>
+        </div>
+        <input type="file" id="imageUpload1" accept="image/*" style="display: none;" onchange="loadImage(event, 'previewImage1', 'placeholder1')">
+        <br>
+        <button onclick="removeImage('previewImage1', 'placeholder1')" class="button is-danger">حذف تصویر</button>
       </div>
 
       <!-- کادر دوم -->
       <div class="column">
-        <input type="file" id="imageUpload2" accept="image/*" onchange="loadImage(event, 'previewImage2')">
-        <br><br>
-        <img id="previewImage2" src="" alt="تصویر بارگذاری شده" style="max-width: 100%; display: none;">
-        <br><br>
-        <button onclick="executeAction('message2')" class="button is-primary">اجرای عملیات ۲</button>
-        <p id="message2" style="color: green; font-weight: bold;"></p>
+        <div onclick="triggerUpload('imageUpload2')" style="cursor: pointer; border: 2px dashed #ccc; padding: 20px; text-align: center;">
+          <img id="previewImage2" src="" alt="برای بارگذاری تصویر کلیک کنید" style="max-width: 100%; display: none;">
+          <p id="placeholder2">برای بارگذاری تصویر کلیک کنید</p>
+        </div>
+        <input type="file" id="imageUpload2" accept="image/*" style="display: none;" onchange="loadImage(event, 'previewImage2', 'placeholder2')">
+        <br>
+        <button onclick="removeImage('previewImage2', 'placeholder2')" class="button is-danger">حذف تصویر</button>
       </div>
 
     </div>
   </div>
 </section>
+
+<script>
+function triggerUpload(inputId) {
+    document.getElementById(inputId).click();
+}
+
+function loadImage(event, imageId, placeholderId) {
+    var output = document.getElementById(imageId);
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.style.display = 'block';
+    document.getElementById(placeholderId).style.display = 'none';
+}
+
+function removeImage(imageId, placeholderId) {
+    var output = document.getElementById(imageId);
+    output.src = "";
+    output.style.display = 'none';
+    document.getElementById(placeholderId).style.display = 'block';
+}
+</script>
+
 
 
 
@@ -91,17 +114,8 @@ function validateForm() {
 }
 </script>
 
-<script>
-function loadImage(event, imageId) {
-    var output = document.getElementById(imageId);
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.style.display = 'block';
-}
 
-function executeAction(messageId) {
-    document.getElementById(messageId).innerText = "عملیات اجرا شد!";
-}
-</script>
+
   
 </body> 
 </html> 
