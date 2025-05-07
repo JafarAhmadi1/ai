@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ai upscaler</title>
-    <link rel='stylesheet' href="css/app.css">
+    <title>Ai Upscaler</title>
+    <link rel='stylesheet' href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="icon" href="icon.png">
-    <!-- افزودن کتابخانه Gradio Client -->
+    <style>
+        .preview-box {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            min-height: 300px;
+            transition: border-color 0.3s;
+        }
+        .preview-box:hover {
+            border-color: #3273dc;
+        }
+        #loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/@gradio/client/dist/index.min.js"></script>
 </head>
 
 <body class="container is-max-desktop has-background-light is-mobile has-text-black-bis">
 
-<!-- بخش هدر (بدون تغییر) -->
 <section class="container has-background-white-ter is-mobile">
   <div class="hero-body has-background-grey-lighter">
     <div class="container">
@@ -25,38 +49,40 @@
   </div>
 </section>
 
-<!-- بخش اصلی با دو کادر -->
 <section class="box m-5 has-background-white has-text-black-bis">
   <div class="container is-fluid">
     <div class="columns">
       
-      <!-- کادر آپلود -->
+      <!-- Input Column -->
       <div class="column">
-        <div onclick="triggerUpload('imageUpload1')" 
-             style="cursor: pointer; border: 2px dashed #ccc; padding: 20px; text-align: center;">
-          <img id="previewImage1" src="" alt="Preview" style="max-width: 100%; display: none;">
+        <div class="preview-box" onclick="triggerUpload('imageUpload1')">
+          <img id="previewImage1" class="preview-image" src="" alt="Preview">
           <p id="placeholder1">برای بارگذاری تصویر کلیک کنید</p>
         </div>
         <input type="file" id="imageUpload1" accept="image/*" 
                style="display: none;" 
                onchange="loadImage(event, 'previewImage1', 'placeholder1')">
-        <br>
-        <button onclick="removeImage('previewImage1', 'placeholder1')" 
-                class="button is-danger">حذف تصویر</button>
-        <button onclick="processImage()" 
-                class="button is-primary">پردازش تصویر</button>
+        <div class="buttons mt-3">
+          <button onclick="removeImage()" 
+                  class="button is-danger">حذف تصویر</button>
+          <button onclick="processImage()" 
+                  class="button is-primary">پردازش تصویر</button>
+        </div>
       </div>
 
-      <!-- کادر نتیجه -->
+      <!-- Output Column -->
       <div class="column">
-        <div style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
-          <img id="previewImage2" src="" 
-               alt="تصویر پردازش شده" 
-               style="max-width: 100%; display: none;">
-          <div id="loading" style="display: none;">
-            <p>در حال پردازش...</p>
-            <progress class="progress is-small is-primary" max="100"></progress>
+        <div class="preview-box" id="output-container">
+          <div id="loading">
+            <div class="loading-spinner">
+              <span class="icon is-large">
+                <i class="fas fa-spinner fa-2x"></i>
+              </span>
+            </div>
+            <p class="mt-2">در حال پردازش...</p>
           </div>
+          <img id="previewImage2" class="preview-image" src="" 
+               alt="تصویر پردازش شده">
         </div>
       </div>
 
@@ -64,61 +90,91 @@
   </div>
 </section>
 
-<!-- فوتتر (بدون تغییر) -->
 <footer class="section has-background-dark is-mobile">
-  <!-- ... -->
+  <div class="content has-text-centered">
+    <p class="has-text-white">© 2023 AI Upscaler. تمام حقوق محفوظ است.</p>
+  </div>
 </footer>
 
 <script>
-// توابع مدیریت تصویر
+// Image Management Functions
 function triggerUpload(inputId) {
     document.getElementById(inputId).click();
 }
 
 function loadImage(event, imageId, placeholderId) {
     const output = document.getElementById(imageId);
+    const placeholder = document.getElementById(placeholderId);
     const file = event.target.files[0];
     
     if (file) {
         output.src = URL.createObjectURL(file);
         output.style.display = 'block';
-        document.getElementById(placeholderId).style.display = 'none';
+        placeholder.style.display = 'none';
+        document.getElementById('previewImage2').style.display = 'none';
     }
 }
 
-function removeImage(imageId, placeholderId) {
-    const output = document.getElementById(imageId);
-    output.src = "";
-    output.style.display = 'none';
-    document.getElementById(placeholderId).style.display = 'block';
-    document.getElementById('previewImage2').style.display = 'none';
+function removeImage() {
+    const inputs = ['previewImage1', 'previewImage2'];
+    const placeholders = ['placeholder1'];
+    
+    inputs.forEach(id => {
+        const element = document.getElementById(id);
+        if(element) {
+            element.src = "";
+            element.style.display = 'none';
+        }
+    });
+    
+    placeholders.forEach(id => {
+        document.getElementById(id).style.display = 'block';
+    });
+    
+    document.getElementById('imageUpload1').value = '';
+    document.getElementById('loading').style.display = 'none';
 }
 
+// Image Processing Function
 async function processImage() {
-    var srcImage = document.getElementById('imageUpload1').dataset.imageUrl;
-
-    if (!srcImage) {
+    const fileInput = document.getElementById('imageUpload1');
+    const file = fileInput.files[0];
+    
+    if (!file) {
         alert("لطفاً تصویری را بارگذاری کنید.");
         return;
     }
 
-    const response = await fetch(srcImage);
-    const imageBlob = await response.blob();
+    const loading = document.getElementById('loading');
+    const outputImage = document.getElementById('previewImage2');
+    
+    try {
+        // Show loading state
+        loading.style.display = 'flex';
+        outputImage.style.display = 'none';
 
-    const client = await Client.connect("TheStinger/Ilaria_Upscaler");
-    const result = await client.predict("/realesrgan", { 
-        img: imageBlob,         
-        model_name: "RealESRGAN_x4plus",        
-        denoise_strength: 0,        
-        face_enhance: true,         
-        outscale: 1, 
-    });
+        // Connect to Gradio API
+        const client = await Client.connect("TheStinger/Ilaria_Upscaler");
+        
+        // Process image with correct parameters
+        const result = await client.predict("/realesrgan", { 
+            img: file,
+            model_name: "RealESRGAN_x4plus",
+            denoise_strength: 0.5,
+            face_enhance: true,
+            outscale: 4
+        });
 
-    const outputImage = result.data;
-    document.getElementById('previewImage1').src = outputImage;
-    document.getElementById('previewImage1').style.display = 'block';
+        // Display result
+        outputImage.src = result.data[0];
+        outputImage.style.display = 'block';
+    } catch (error) {
+        console.error('Error processing image:', error);
+        alert('خطا در پردازش تصویر. لطفاً دوباره تلاش کنید.');
+    } finally {
+        loading.style.display = 'none';
+    }
 }
-
 </script>
 
 </body>
